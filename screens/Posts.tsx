@@ -4,7 +4,7 @@ import usePosts from '../hooks/usePosts';
 import {Text} from '../components/Text';
 import colors from '../constants/color';
 
-export const Posts = ({navigation}) => {
+export const Posts = ({navigation}): JSX.Element => {
   const {data, isLoading, isSuccess} = usePosts();
   return (
     <View style={styles.container}>
