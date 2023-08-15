@@ -19,6 +19,8 @@ import {
 import Login from './screens/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {QueryClient, QueryClientProvider} from 'react-query';
+import {Main} from './screens/Main';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -50,6 +52,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 const Stack = createNativeStackNavigator();
+const queryClient = new QueryClient();
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -59,9 +62,9 @@ function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>
+      <QueryClientProvider client={queryClient}>
+        <Main />
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }
