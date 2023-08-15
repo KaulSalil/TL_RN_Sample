@@ -4,7 +4,6 @@ import {validateCredentials} from '../businesslogic';
 
 function Login() {
   const [userName, setUserName] = useState('');
-  x;
   const [password, setPassword] = useState('');
 
   const onLoginPressed = (): void => {
