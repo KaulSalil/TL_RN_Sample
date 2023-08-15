@@ -1,8 +1,23 @@
 import React, {useState} from 'react';
-import {TextInput, Button, View, Alert} from 'react-native';
+import {
+  TextInput,
+  Button,
+  View,
+  Alert,
+  useColorScheme,
+  StatusBar,
+  SafeAreaView,
+} from 'react-native';
 import {validateCredentials} from '../businesslogic';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-function Login() {
+function Login(): JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,11 +30,17 @@ function Login() {
     }
   };
   return (
-    <View>
-      <TextInput value={userName} onChangeText={setUserName} />
-      <TextInput value={password} onChangeText={setPassword} />
-      <Button onPress={onLoginPressed} title="Login" />
-    </View>
+    <SafeAreaView style={backgroundStyle}>
+      <View>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+        <TextInput value={userName} onChangeText={setUserName} />
+        <TextInput value={password} onChangeText={setPassword} />
+        <Button onPress={onLoginPressed} title="Login" />
+      </View>
+    </SafeAreaView>
   );
 }
 export default Login;
