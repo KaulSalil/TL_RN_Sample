@@ -5,7 +5,8 @@ import {Text} from '../components/Text';
 import colors from '../constants/color';
 
 export const Posts = ({navigation}): JSX.Element => {
-  const {data, isLoading, isSuccess} = usePosts();
+  const {data, isLoading, isSuccess, isError} = usePosts();
+
   return (
     <View style={styles.container}>
       {isLoading && (
@@ -26,11 +27,19 @@ export const Posts = ({navigation}): JSX.Element => {
                 onPress={() => navigation.push('Post', {post: item})}
                 style={styles.post}>
                 <View style={styles.item}>
+                  <Text style={styles.label}>Title:</Text>
                   <Text style={styles.postTitle}>{item.title}</Text>
+                  <Text style={styles.label}>Body:</Text>
+                  <Text style={styles.postBody}>{item.body}</Text>
                 </View>
               </TouchableOpacity>
             )}
           />
+        </React.Fragment>
+      )}
+      {isError && (
+        <React.Fragment>
+          <Text>Oops Something went wrong</Text>
         </React.Fragment>
       )}
     </View>
@@ -65,5 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
-  postTitle: {color: colors.white, textTransform: 'capitalize'},
+  postTitle: {color: colors.white, textTransform: 'capitalize', fontSize: 18},
+  postBody: {color: colors.white, textTransform: 'capitalize', fontSize: 14},
+  label: {color: 'white'},
 });

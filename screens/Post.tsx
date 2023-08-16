@@ -1,31 +1,21 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import usePost from '../hooks/usePost';
 import {Text} from '../components/Text';
 import colors from '../constants/color';
 
 export const Post = ({route}): JSX.Element => {
   const {post} = route && route.params;
-  const {data: comments, isSuccess, isLoading} = usePost(post.id);
+  //const {data: comments, isSuccess, isLoading} = usePost(post.id);
   return (
     <ScrollView style={styles.container}>
+      <Text style={styles.lable}>Title:</Text>
       <Text style={styles.header}>{post.title}</Text>
-      <View style={styles.post}>
-        <Text>{post.body}</Text>
-      </View>
-      {isLoading && <Text style={{textAlign: 'center'}}>Loading...</Text>}
-
-      {isSuccess && (
-        <React.Fragment>
-          <Text style={styles.commentHeader}>Comments</Text>
-          {comments.map(comment => (
-            <View key={comment.id} style={styles.post}>
-              <Text>{comment.body}</Text>
-              <Text>{comment.email}</Text>
-            </View>
-          ))}
-        </React.Fragment>
-      )}
+      <Text style={styles.lable}>Body:</Text>
+      <Text style={styles.post}>{post.body}</Text>
+      <Text style={styles.lable}>User Id:</Text>
+      <Text style={styles.post}>{post.userId}</Text>
+      <Text style={styles.lable}>Id:</Text>
+      <Text style={styles.post}>{post.id}</Text>
     </ScrollView>
   );
 };
@@ -41,7 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
     color: colors.primary,
-    paddingVertical: 10,
+    paddingBottom: 15,
   },
   commentHeader: {
     textAlign: 'center',
@@ -49,11 +39,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     color: colors.primary,
-    paddingVertical: 30,
+    paddingBottom: 15,
   },
   post: {
     flex: 1,
-    paddingVertical: 10,
+    paddingBottom: 15,
     alignItems: 'center',
   },
+  lable: {color: colors.primary, fontSize: 20},
 });
