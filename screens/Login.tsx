@@ -27,7 +27,6 @@ function Login({navigation}): JSX.Element {
   const onLoginPressed = (): void => {
     console.log(`userName:${userName} password:${password}`);
     if (validateCredentials(userName, password)) {
-      Alert.alert('Login successful.');
       navigation.navigate('Home');
     } else {
       Alert.alert('Login failed.');

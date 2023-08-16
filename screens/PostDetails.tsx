@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import {Text} from '../components/Text';
 import colors from '../constants/color';
 
-export const Post = ({route}): JSX.Element => {
+export const PostDetails = ({route}): JSX.Element => {
   const {post} = route && route.params;
-  //const {data: comments, isSuccess, isLoading} = usePost(post.id);
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.lable}>Title:</Text>

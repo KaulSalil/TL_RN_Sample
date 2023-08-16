@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import usePosts from '../hooks/usePosts';
 import {Text} from '../components/Text';
 import colors from '../constants/color';
 
 export const Posts = ({navigation}): JSX.Element => {
-  const {data, isLoading, isSuccess, isError} = usePosts();
+  const {data, isLoading, isSuccess, isError, refetch} = usePosts();
 
   return (
     <View style={styles.container}>
@@ -18,13 +24,14 @@ export const Posts = ({navigation}): JSX.Element => {
       {isSuccess && (
         <React.Fragment>
           <Text style={styles.header}>all posts</Text>
+          <Button title="Fetch Latest" onPress={() => refetch()} />
           <FlatList
             data={data}
             style={styles.wrapper}
             keyExtractor={item => `${item.id}`}
             renderItem={({item}) => (
               <TouchableOpacity
-                onPress={() => navigation.push('Post', {post: item})}
+                onPress={() => navigation.push('PostDetails', {post: item})}
                 style={styles.post}>
                 <View style={styles.item}>
                   <Text style={styles.label}>Title:</Text>
