@@ -5,6 +5,10 @@
  * @format
  */
 
+// basic validation on login screen
+// test cases for the login screen and list screen
+// jest
+
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {StyleSheet, Text, useColorScheme, View} from 'react-native';
