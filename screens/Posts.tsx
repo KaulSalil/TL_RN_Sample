@@ -29,6 +29,8 @@ export const Posts = ({navigation}): JSX.Element => {
             data={data}
             style={styles.wrapper}
             keyExtractor={item => `${item.id}`}
+            onRefresh={() => refetch()}
+            refreshing={isLoading}
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => navigation.push('PostDetails', {post: item})}
